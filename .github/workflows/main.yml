@@ -23,6 +23,10 @@ jobs:
       - name: Publish .NET Core Project
         run: dotnet publish KanbanBoard/KanbanBoard.csproj -c Release -o release --nologo
           
+      # changes the base-tag in index.html
+      - name: Change base-tag
+        run: sed -i 's/<base href="\/" \/>/<base href="\/KanbanBoard\/" \/>/g' release/wwwroot/index.html
+      
       - name: Commit wwwroot to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@3.7.1
         with: 
